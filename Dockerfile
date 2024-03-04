@@ -16,16 +16,17 @@ COPY --from=source /usr/bin/container-entrypoint /usr/bin/container-entrypoint
 COPY --from=source /usr/bin/run-postgresql /usr/bin/run-postgresql
 
 RUN    microdnf install -y \
-         rsync \
-         tar \
+         bind-utils \
+         findutils \
          gettext \
          glibc-langpack-en \
          glibc-locale-source \
-         bind-utils \
          nss_wrapper \
          postgresql-server \
          postgresql-contrib \
          pgaudit \
+         rsync \
+         tar \
     && localedef -f UTF-8 -i en_US en_US.UTF-8 \
     && mkdir -p /var/lib/pgsql/data \
     && microdnf clean all \
