@@ -15,7 +15,8 @@ COPY --from=source /usr/bin/cgroup-limits /usr/bin/cgroup-limits
 COPY --from=source /usr/bin/container-entrypoint /usr/bin/container-entrypoint
 COPY --from=source /usr/bin/run-postgresql /usr/bin/run-postgresql
 
-RUN    microdnf install -y \
+RUN    microdnf module enable -y postgresql:$POSTGRESQL_VERSION \
+    && microdnf install -y \
          bind-utils \
          findutils \
          gettext \
