@@ -1,4 +1,4 @@
-FROM quay.io/sclorg/postgresql-16-c9s:20251015 as source
+FROM quay.io/sclorg/postgresql-16-c9s:20251022 as source
 FROM ghcr.io/radiorabe/ubi9-minimal:0.10.1 AS app
 
 ENV CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/postgresql \
