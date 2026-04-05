@@ -17,6 +17,13 @@ jobs:
       display-name: RaBe PostgreSQL on UBI9
       tags: minimal rhel9 ubi9 rabe postgresql
       cosign-base-image-only: true
+      platforms: "linux/amd64,linux/arm64"
+      docker-daemon-config: |
+        {
+          "features": {
+            "containerd-snapshotter": true
+          }
+        }
   mkdocs:
     runs-on: ubuntu-latest
     permissions:
