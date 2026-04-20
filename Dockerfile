@@ -15,23 +15,29 @@ COPY --from=source /usr/bin/cgroup-limits /usr/bin/cgroup-limits
 COPY --from=source /usr/bin/container-entrypoint /usr/bin/container-entrypoint
 COPY --from=source /usr/bin/run-postgresql /usr/bin/run-postgresql
 
-RUN    microdnf module enable -y postgresql:$POSTGRESQL_VERSION \
-    && microdnf install -y \
+RUN <<-EOR
+    set -xe
+    microdnf install -y \
          bind-utils \
          findutils \
-         gettext \
+         gettext-envsubst \
          glibc-langpack-en \
          glibc-locale-source \
-         nss_wrapper \
+         nss_wrapper-libs \
          postgresql-server \
          postgresql-contrib \
+         postgresql-upgrade \
          pgaudit \
+         pgvector \
          rsync \
          tar \
-    && localedef -f UTF-8 -i en_US en_US.UTF-8 \
-    && mkdir -p /var/lib/pgsql/data \
-    && microdnf clean all \
-    && [[ "$(id postgres)" == "uid=26(postgres) gid=26(postgres) groups=26(postgres)" ]]
+         xz
+    localedef -f UTF-8 -i en_US en_US.UTF-8
+    mkdir -p /run/postgresql /var/lib/pgsql/data
+    postgres -V | grep -qe "$POSTGRESQL_VERSION\." && echo "Found VERSION $POSTGRESQL_VERSION"
+    microdnf clean all
+    test "$(id postgres)" = "uid=26(postgres) gid=26(postgres) groups=26(postgres)"
+EOR
 
 USER 26
 ENTRYPOINT ["container-entrypoint"]
