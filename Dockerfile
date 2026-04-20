@@ -1,5 +1,5 @@
-FROM quay.io/sclorg/postgresql-16-c9s:20260311 as source
-FROM ghcr.io/radiorabe/ubi9-minimal:0.11.4 AS app
+FROM quay.io/sclorg/postgresql-16-c10s:20260415 AS source
+FROM ghcr.io/radiorabe/ubi10-minimal:0.1.4 AS app
 
 ENV CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/postgresql \
     HOME=/var/lib/pgsql \
