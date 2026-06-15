@@ -1,5 +1,5 @@
-FROM quay.io/sclorg/postgresql-16-c10s:20260415@sha256:924ca9c2bf7683547f175fc73d5bad25ebe1bdecc95e85c2e8d51b67ebcfc4b8 AS source
-FROM ghcr.io/radiorabe/ubi10-minimal:0.1.5@sha256:aef2bdbd2136692fbd5af48cd63e8c1c2c7c0e46306bb77563615fbcdc961f06 AS app
+FROM quay.io/sclorg/postgresql-16-c10s:20260610@sha256:697c9fe82f9347c34c976eea725000a2802dc4a249d03389d56e98a8128b3370 AS source
+FROM ghcr.io/radiorabe/ubi10-minimal:0.1.7@sha256:d8303c8a4a9eb4b744b3f18b2db582e8f00622b4151ed57ecdfbba8601959c63 AS app
 
 ENV CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/postgresql \
     HOME=/var/lib/pgsql \
